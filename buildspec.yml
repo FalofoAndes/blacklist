@@ -4,13 +4,16 @@ phases:
   install:
     runtime-versions:
       python: 3.11
+
+  pre_build:
     commands:
-      - echo "Instalando dependencias"
-      - pip install -r requirements.txt -t .
+      - echo "Instalando dependencias para validar"
+      - pip install -r requirements.txt
+
   build:
     commands:
-      - echo "Empaquetando aplicación"
-      - zip -r app.zip . -x "*.git*" "*.gitignore" "*__pycache__*"
+      - echo "Empaquetando solo archivos del repositorio"
+      - zip -r app.zip . -x "*.git*" "*__pycache__*" "*.pyc" "*.pyo" "*.dist-info*" "*.egg-info*" ".venv*" "package*" "venv*" "build*" "*.log"
 artifacts:
   files:
     - app.zip
